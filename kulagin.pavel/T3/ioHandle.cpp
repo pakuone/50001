@@ -67,7 +67,7 @@ std::istream& operator>>(std::istream& in, Polygon& p) {
             p.points_.push_back(temp);
         }
         else {
-            return in; 
+            return in;
         }
     }
 
