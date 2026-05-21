@@ -12,7 +12,7 @@ double area(const Polygon& polygon) {
 
     double area = 0.0;
 
-    for (int i = 0; i < polygon.points_.size(); i++) {
+    for (size_t i = 0; i < polygon.points_.size(); i++) {
         const Point& p1 = polygon.points_[i];
         const Point& p2 = polygon.points_[(i + 1) % polygon.points_.size()];
 
