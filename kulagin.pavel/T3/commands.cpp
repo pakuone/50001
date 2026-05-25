@@ -54,7 +54,7 @@ void cArea(std::istringstream& iss, const std::vector<Polygon>& polygons) {
         try {
             int num = std::stoi(param);
             auto op = [num](double sum, const Polygon& p) {
-                if (p.points_.size() == num) {
+                if (p.points_.size() == static_cast<size_t>(num)) {
                     return sum + area(p);
                 }
                 return sum;
@@ -160,7 +160,7 @@ void cCount(std::istringstream& iss, const std::vector<Polygon>& polygons) {
             int num = std::stoi(param);
             int count = std::count_if(polygons.begin(), polygons.end(),
                 [num](const Polygon& p) {
-                    return p.points_.size() == num;
+                    return p.points_.size() == static_cast<size_t>(num);
                 });
 
             std::cout << count << "\n";
