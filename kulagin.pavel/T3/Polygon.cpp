@@ -3,6 +3,7 @@
 #include <vector>
 #include <algorithm>
 #include <numeric>
+#include <iostream>
 
 bool Point::operator==(const Point& other) const {
     return (other.x_ == x_) && (other.y_ == y_);

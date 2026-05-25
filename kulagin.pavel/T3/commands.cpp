@@ -15,12 +15,11 @@ void cArea(std::istringstream& iss, const std::vector<Polygon>& polygons) {
     std::string param;
     iss >> param;
 
-    if (polygons.empty()) {
-        std::cout << "<INVALID COMMAND>\n";
-        return;
-    }
-
     if (param == "EVEN") {
+        if (polygons.empty()) {
+            cPrintDouble(0.0);
+            return;
+        }
         auto op = [](const double sum, const Polygon& p) {
             if (p.points_.size() % 2 == 0) {
                 return sum + area(p);
@@ -32,6 +31,10 @@ void cArea(std::istringstream& iss, const std::vector<Polygon>& polygons) {
         cPrintDouble(total);
     }
     else if (param == "ODD") {
+        if (polygons.empty()) {
+            cPrintDouble(0.0);
+            return;
+        }
         auto op = [](const double sum, const Polygon& p) {
             if (p.points_.size() % 2 == 1) {
                 return sum + area(p);
@@ -43,6 +46,10 @@ void cArea(std::istringstream& iss, const std::vector<Polygon>& polygons) {
         cPrintDouble(total);
     }
     else if (param == "MEAN") {
+        if (polygons.empty()) {
+            std::cout << "<INVALID COMMAND>\n";
+            return;
+        }
         auto op = [](double sum, const Polygon& p) {
             return sum + area(p);
         };
@@ -53,6 +60,17 @@ void cArea(std::istringstream& iss, const std::vector<Polygon>& polygons) {
     else {
         try {
             int num = std::stoi(param);
+
+            if (num < 3) {
+                std::cout << "<INVALID COMMAND>\n";
+                return;
+            }
+
+            if (polygons.empty()) {
+                cPrintDouble(0.0);
+                return;
+            }
+
             auto op = [num](double sum, const Polygon& p) {
                 if (p.points_.size() == static_cast<size_t>(num)) {
                     return sum + area(p);
@@ -158,6 +176,12 @@ void cCount(std::istringstream& iss, const std::vector<Polygon>& polygons) {
     else {
         try {
             int num = std::stoi(param);
+
+            if (num < 3) {
+                std::cout << "<INVALID COMMAND>\n";
+                return;
+            }
+
             int count = std::count_if(polygons.begin(), polygons.end(),
                 [num](const Polygon& p) {
                     return p.points_.size() == static_cast<size_t>(num);
@@ -201,6 +225,11 @@ void cInFrame(std::istringstream& iss, const std::vector<Polygon>& polygons) {
     iss >> p;
 
     if (!iss) {
+        std::cout << "<INVALID COMMAND>\n";
+        return;
+    }
+
+    if (p.points_.size() < 3) {
         std::cout << "<INVALID COMMAND>\n";
         return;
     }
