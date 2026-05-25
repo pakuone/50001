@@ -234,6 +234,14 @@ void cInFrame(std::istringstream& iss, const std::vector<Polygon>& polygons) {
         return;
     }
 
+    char c;
+    if (iss >> c) {
+        if (c == '(') {
+            std::cout << "<INVALID COMMAND>\n";
+            return;
+        }
+    }
+
     if (polygons.empty()) {
         std::cout << "<FALSE>\n";
         return;
