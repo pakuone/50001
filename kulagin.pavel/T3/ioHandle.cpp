@@ -71,10 +71,7 @@ std::istream& operator>>(std::istream& in, Polygon& p) {
         }
     }
 
-    char c;
-    if (in >> c) {
-        in.setstate(std::ios::failbit);
-    }
+    if (in.peek() != EOF) in.setstate(std::ios::failbit);
 
     return in;
 }
